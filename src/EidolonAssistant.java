@@ -1,3 +1,8 @@
+/*
+ * Made by Earl Kennedy
+ * https://github.com/Mnenmenth
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;

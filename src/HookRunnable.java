@@ -1,3 +1,8 @@
+/*
+ * Made by Earl Kennedy
+ * https://github.com/Mnenmenth
+ */
+
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.Kernel32;
 import com.sun.jna.platform.win32.User32;
@@ -48,7 +53,7 @@ public class HookRunnable implements Runnable {
         // new thread to process key strokes
         new Thread(() -> {
                 while(!EidolonAssistant.quit) {
-                    // 51 is button 3 which is what you use to activate chroma's 3
+                    // start ability countdown if right key is pressed
                     if (key == DisplayPanel.keyCode) {
                         // start countdown in ui in a way that makes swing happy
                         SwingUtilities.invokeLater(DisplayPanel::startCountdown);
@@ -65,7 +70,7 @@ public class HookRunnable implements Runnable {
                 }
                 lib.UnhookWindowsHookEx(hhk);
         }).start();
-        // process system messages about keystrokes
+        // process system messages about keystrokes (thread never actually executes past GetMessage)
         int result;
         WinUser.MSG msg = new WinUser.MSG();
         while((result = lib.GetMessage(msg, null, 0, 0)) != 0) {
